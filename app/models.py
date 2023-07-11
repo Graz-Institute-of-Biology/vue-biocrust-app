@@ -35,4 +35,5 @@ class PredResults(models.Model):
     petal_width = models.FloatField()
 
 
-  
+class Document(models.Model):
+    document = models.FileField(upload_to='uploads/%Y/%m/%d')

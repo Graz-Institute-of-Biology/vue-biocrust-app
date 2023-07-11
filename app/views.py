@@ -8,6 +8,9 @@ from django.http import JsonResponse
 from .models import PredResults
 import numpy as np
 import sys
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from .forms import UploadForm
 # Create your views here.
 
     
@@ -53,3 +56,19 @@ class PostsView(generics.ListCreateAPIView):
             return Response(result)
         return Response(serializer.errors, status=400)
 
+
+@csrf_exempt 
+def index(request):
+    form = UploadForm()
+
+    return render(request, 'app/templates/index.html', {'form': form})
+
+@csrf_exempt 
+def upload(request):
+    if request.FILES:
+        form = UploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+    
+    return JsonResponse({'success': True})

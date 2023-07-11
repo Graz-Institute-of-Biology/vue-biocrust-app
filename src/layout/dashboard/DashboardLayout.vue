@@ -16,6 +16,7 @@
         <sidebar-link to="/posts" name="Posts" icon="ti-image" />
         <sidebar-link to="/tests" name="Tests" icon="ti-image" />
         <sidebar-link to="/image" name="Image" icon="ti-image" />
+        <sidebar-link to="/files" name="Upload" icon="ti-image" />
       </template>
       <mobile-menu>
         <li class="nav-item">

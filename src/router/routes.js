@@ -13,6 +13,7 @@ import TableList from "@/pages/TableList.vue";
 import Prediction from "@/pages/Prediction.vue"
 import Tests from "@/pages/Tests.vue"
 import ImageNew from "@/pages/ImageNew.vue"
+import Upload from "@/pages/Upload.vue"
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
+      {
+        path: "files",
+        name: "files",
+        component: Upload,
+      },
       {
         path: "image",
         name: "image",

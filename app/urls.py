@@ -9,6 +9,8 @@ urlpatterns = [
     path('tests/',TestsView.as_view(), name='tests_view'),
     #path('image/',ImageView.as_view(), name='image_view'),
     path('image/',ImageNewView.as_view(), name='imagenew_view'),
+    path('files/', views.index, name='index'),
+    path('upload/', views.upload, name='upload'),
     
 ]
 

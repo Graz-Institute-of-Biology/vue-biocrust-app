@@ -15,8 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
-MEDIA_URL = 'media/'
+
 
 
 
@@ -47,10 +46,27 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
     'http://127.0.0.1:8080',
-)
+    )
+
+CORS_ALLOW_HEADERS = ['X-CSRFToken']
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080','http://127.0.0.1:8080']
+
+# For Cookie
+
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+
+# Since the frontend is on `http://localhost:8080` and the backend is on `http://localhost:8000`, they are two different origins and we need to set samesite to false
+
+# UPDATE: Starting with django 3.1 this must be set to 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
 
 ROOT_URLCONF = 'djangorestapi.urls'
 
@@ -121,20 +137,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-# settings for django-webpack-loader
-STATIC_ROOT = os.path.join(BASE_DIR, 'public')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'dist'),
-)
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': '',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-        'POLL_INTERVAL': 0.1,
-        'TIMEOUT': None,
-        'IGNORE': ['.+\\.hot-update.js', '.+\\.map']
-    }
-}
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR + '/media'
