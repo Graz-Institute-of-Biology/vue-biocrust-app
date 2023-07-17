@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
-from .models import Posts, Tests, Image, ImageNew, Document
+from .models import Posts, Tests, Image, ImageNew, Document, DLModel
 from .serializers import PostSerializer, TestSerializer, ImageSerializer, ImageNewSerializer, PredSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -32,6 +32,14 @@ class ImageView(generics.RetrieveAPIView):
     
 class ImageNewView(generics.RetrieveAPIView):
     queryset = Document.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = ImageNewSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+class GetModelsView(generics.RetrieveAPIView):
+    queryset = DLModel.objects.all()
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()

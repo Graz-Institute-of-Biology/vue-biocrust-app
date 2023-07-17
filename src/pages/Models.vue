@@ -21,6 +21,28 @@
             </p>
             <!-- <img v-for="p in context" :src="p.url" :alt="dere" /> -->
         </div>
+        <div class="album py-5 bg-light">
+            <div class="container">
+              <div class="row">
+                <div v-for="image in APIData" :key="image.id" class="col-md-4">
+                  "{{ image.document }}"
+                  <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h4 class=""><a class="text-secondary" href="">{{image.document}}</a></h4>
+                        <p class="card-text">{{image.document}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                        <a href="" class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
+                        <a href="" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -35,9 +57,21 @@ export default {
     name: 'UploadModel',
         data() {
             return {
-                documents: []
+                documents: [],
+                APIData: []
             }
         },
+        created () {
+          getAPI.get('/getmodels/',)
+            .then(response => {
+              console.log('Post API has recieved data')
+              this.APIData = response.data
+
+            })
+            .catch(err => {
+              console.log(err)
+            })
+      },
         delimiters: ['[[', ']]'],
         methods: {
             selectFile() {

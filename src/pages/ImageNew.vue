@@ -25,7 +25,7 @@
 
 
                     <!-- <img :src="require('@' + '/..' + `${image.document}`)"> -->
-                    <!-- "{{ image.document }}" -->
+                    "{{ image.document }}"
                     <div class="card-body">
                         <h4 class=""><a class="text-secondary" href="">{{image.document}}</a></h4>
                         <p class="card-text">{{image.document}}</p>
