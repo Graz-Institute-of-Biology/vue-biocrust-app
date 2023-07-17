@@ -14,6 +14,7 @@ import Prediction from "@/pages/Prediction.vue"
 import Tests from "@/pages/Tests.vue"
 import ImageNew from "@/pages/ImageNew.vue"
 import Upload from "@/pages/Upload.vue"
+import Models from "@/pages/Models.vue"
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
+      {
+        path: "uploadmodel",
+        name: "uploadmodel",
+        component: Models,
+      },
       {
         path: "files",
         name: "files",

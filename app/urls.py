@@ -11,6 +11,7 @@ urlpatterns = [
     path('image/',ImageNewView.as_view(), name='imagenew_view'),
     path('files/', views.index, name='index'),
     path('upload/', views.upload, name='upload'),
+    path('uploadmodel/', views.uploadmodel, name='uploadmodel'),
     
 ]
 

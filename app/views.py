@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
-from .models import Posts, Tests, Image, ImageNew
+from .models import Posts, Tests, Image, ImageNew, Document
 from .serializers import PostSerializer, TestSerializer, ImageSerializer, ImageNewSerializer, PredSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -10,7 +10,7 @@ import numpy as np
 import sys
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .forms import UploadForm
+from .forms import UploadForm, ModelUploadForm
 # Create your views here.
 
     
@@ -31,7 +31,7 @@ class ImageView(generics.RetrieveAPIView):
         return Response(serializer.data)
     
 class ImageNewView(generics.RetrieveAPIView):
-    queryset = ImageNew.objects.all()
+    queryset = Document.objects.all()
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -60,13 +60,24 @@ class PostsView(generics.ListCreateAPIView):
 @csrf_exempt 
 def index(request):
     form = UploadForm()
-
-    return render(request, 'app/templates/index.html', {'form': form})
+    files = Document.objects.all()
+    context = {'files': files}
+    return render(request, 'src/Pages/Upload.vue', {'form': form}, context)
 
 @csrf_exempt 
 def upload(request):
     if request.FILES:
         form = UploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+    
+    return JsonResponse({'success': True})
+
+@csrf_exempt 
+def uploadmodel(request):
+    if request.FILES:
+        form = ModelUploadForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()

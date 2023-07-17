@@ -8,3 +8,5 @@ dist/
 *.pyc
 *.sqlite3
 vuewebapp/djangorestapi/settings.py
+src/media/
+media

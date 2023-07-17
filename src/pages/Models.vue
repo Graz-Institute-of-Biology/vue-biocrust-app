@@ -32,7 +32,7 @@ import { getAPI } from '../axios-api'
 axios.defaults.xsrfCookieName = 'csrf_token';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 export default {
-    name: 'Upload',
+    name: 'UploadModel',
         data() {
             return {
                 documents: []
@@ -74,7 +74,7 @@ export default {
                 formData.append('document', file)
 
                 return getAPI
-                    .post('/upload/', formData, {
+                    .post('/uploadmodel/', formData, {
                         headers: {"Content-Type": "multipart/form-data",
                             //"X-CSRFToken": "csrf_token"
                             //xsrfCookieName: 'csrftoken',

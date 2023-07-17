@@ -37,3 +37,8 @@ class PredResults(models.Model):
 
 class Document(models.Model):
     document = models.FileField(upload_to='uploads/%Y/%m/%d')
+
+class DLModel(models.Model):
+    document = models.FileField(upload_to='uploads/models')
+
+
