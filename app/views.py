@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
-from .models import Posts, Tests, Image, ImageNew, Document, DLModel
+from .models import Posts, Tests, Image, ImageNew, Document, DLModel, ImageDoc
 from .serializers import PostSerializer, TestSerializer, ImageSerializer, ImageNewSerializer, PredSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -70,7 +70,14 @@ def index(request):
     form = UploadForm()
     files = Document.objects.all()
     context = {'files': files}
-    return render(request, 'src/Pages/Upload.vue', {'form': form}, context)
+    return render(request, 'src/pages/Upload.vue', {'form': form}, context)
+
+@csrf_exempt 
+def getimg(request):
+    imgs = Document.objects.all() #filter(file_type='document')
+    context = {'images': imgs}
+    return render(request, 'src/pages/ImageNew.vue', context)
+    #return Response(imgs)
 
 @csrf_exempt 
 def upload(request):

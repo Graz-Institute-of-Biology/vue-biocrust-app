@@ -38,6 +38,9 @@ class PredResults(models.Model):
 class Document(models.Model):
     document = models.ImageField(upload_to='uploads/images')
 
+class ImageDoc(models.Model):
+    document = models.ImageField(upload_to='uploads/images')
+
 class DLModel(models.Model):
     document = models.ImageField(upload_to='uploads/models')
 

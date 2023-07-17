@@ -6,29 +6,11 @@
               <div class="row">
                 <div v-for="image in APIData" :key="image.id" class="col-md-4">
                   <div class="card mb-4 box-shadow">
-                    <!-- <img >{{image.image}} > -->
-                    <!-- <html> $imagename = {{image.image}} </html> -->
-
-                    <!-- <img src="@/../media/uploads/2023/07/11/img_2.png"/> -->
-                    <!-- <img :src="getPhoto(image.document)"/> -->
-                    <!-- "{{ (image.document) }}" -->
-
-                    <!-- <img :src="require(image.document)"/> -->
-
-                    <!-- <img :src="require(`${image.document}`)"/> -->
-                    <!-- <img :src= "image.document" /> -->
-                    <!-- <img :src=  "'@/..' + image.document"  /> -->
-                    <!-- "require('@' + image.document)" -->
-                    <!-- <img :src= "{/media/uploads/2023/07/11/img_2.png}" /> -->
                     
-                    <!-- <img :src="require('@/..' + image.document)" /> -->
-
-
-                    <!-- <img :src="require('@' + '/..' + `${image.document}`)"> -->
                     "{{ image.document }}"
                     <div class="card-body">
-                        <h4 class=""><a class="text-secondary" href="">{{image.document}}</a></h4>
-                        <p class="card-text">{{image.document}}</p>
+                        <h4 class=""><a class="text-secondary" href="">{{image.id}}</a></h4>
+                        <p class="card-text">{{image.id}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                         <a href="" class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
