@@ -9,6 +9,7 @@ from .models import PredResults
 import numpy as np
 import sys
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import default_storage
 from django.http import JsonResponse
 from .forms import UploadForm, ModelUploadForm
 # Create your views here.
@@ -78,6 +79,19 @@ def getimg(request):
     context = {'images': imgs}
     return render(request, 'src/pages/ImageNew.vue', context)
     #return Response(imgs)
+
+@csrf_exempt 
+def get_images(request):
+    if request:
+        # Assuming your model is named 'MyModel' and the ImageField is named 'image'
+        images = Document.objects.all() #.values_list('image', flat=True)
+        
+        image_urls = []
+        for image_path in images:
+            image_url = default_storage.url(image_path)
+            image_urls.append(image_url)
+        
+        return JsonResponse({'image_urls': image_urls})
 
 @csrf_exempt 
 def upload(request):

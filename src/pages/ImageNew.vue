@@ -4,13 +4,13 @@
         <div class="album py-5 bg-light">
             <div class="container">
               <div class="row">
-                <div v-for="image in APIData" :key="image.id" class="col-md-4">
+                <div v-for="imageUrl in APIData" :key="imageUrl">
                   <div class="card mb-4 box-shadow">
-                    
-                    "{{ image.document }}"
+                    <!-- <img :src="imageUrl" alt="Image"> -->
+                    <img src = "http://127.0.0.1:8000/media/uploads/images/img_2.png" >
                     <div class="card-body">
-                        <h4 class=""><a class="text-secondary" href="">{{image.id}}</a></h4>
-                        <p class="card-text">{{image.id}}</p>
+                        <h4 class=""><a class="text-secondary" href="">{{imageUrl}}</a></h4>
+                        <p class="card-text">{{imageUrl}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                         <a href="" class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
@@ -40,12 +40,11 @@
       components: {
         Navbar
       },
-      created () {
+      mounted () {
           getAPI.get('/image/',)
             .then(response => {
               console.log('Post API has recieved data')
-              this.APIData = response.data
-
+              this.APIData = response.data.image_urls;
             })
             .catch(err => {
               console.log(err)
