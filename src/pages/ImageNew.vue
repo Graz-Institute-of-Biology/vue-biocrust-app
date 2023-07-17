@@ -4,13 +4,15 @@
         <div class="album py-5 bg-light">
             <div class="container">
               <div class="row">
-                <div v-for="imageUrl in APIData" :key="imageUrl">
+                <div v-for="image in APIData" :key="image.id" class="col-md-4">
                   <div class="card mb-4 box-shadow">
-                    <!-- <img :src="imageUrl" alt="Image"> -->
-                    <img src = "http://127.0.0.1:8000/media/uploads/images/img_2.png" >
+                    <img :src= getPhoto(image.document) alt="Image">
+                    <!-- <img src = "http://127.0.0.1:8000/media/uploads/images/img_2.png" > -->
+
+                    "{{ image.document }}"
                     <div class="card-body">
-                        <h4 class=""><a class="text-secondary" href="">{{imageUrl}}</a></h4>
-                        <p class="card-text">{{imageUrl}}</p>
+                        <h4 class=""><a class="text-secondary" href="">{{image.id}}</a></h4>
+                        <p class="card-text">{{image.id}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                         <a href="" class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
@@ -40,11 +42,12 @@
       components: {
         Navbar
       },
-      mounted () {
+      created () {
           getAPI.get('/image/',)
             .then(response => {
               console.log('Post API has recieved data')
-              this.APIData = response.data.image_urls;
+              this.APIData = response.data
+
             })
             .catch(err => {
               console.log(err)
@@ -59,13 +62,13 @@
         // console.log(require(path));
         // return require.context("@/.." + path);
         // return require("@/../media/uploads/2023/07/11/img_2.png");
-        var p_string = "/.." + path
+        var p_string = "http://127.0.0.1:8000" + path
         console.log(p_string)
         var t_string = "@/../media/uploads/2023/07/11/img_2.png"
         console.log(t_string)
         //var images = require.context('@/../', false, /\.png$/)
         console.log('---')
-        return require("@/../media/uploads/2023/07/11/img_2.png")
+        return p_string
         //return require(p_string)
         // return "@/.." + path
         
