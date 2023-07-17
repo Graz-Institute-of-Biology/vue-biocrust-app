@@ -8,8 +8,6 @@
                   <div class="card mb-4 box-shadow">
                     <img :src= getPhoto(image.document) alt="Image">
                     <!-- <img src = "http://127.0.0.1:8000/media/uploads/images/img_2.png" > -->
-
-                    "{{ image.document }}"
                     <div class="card-body">
                         <h4 class=""><a class="text-secondary" href="">{{image.id}}</a></h4>
                         <p class="card-text">{{image.id}}</p>
@@ -55,22 +53,11 @@
       },
       methods: {
         getPhoto(path) {
-        // return require("@/../media/uploads/2023/07/11/img_2.png");
-        console.log("@/../media/uploads/2023/07/11/img_2.png")
-        console.log("@/.." + path);
-        console.log(require("@/../media/uploads/2023/07/11/img_2.png"))
-        // console.log(require(path));
-        // return require.context("@/.." + path);
-        // return require("@/../media/uploads/2023/07/11/img_2.png");
         var p_string = "http://127.0.0.1:8000" + path
         console.log(p_string)
         var t_string = "@/../media/uploads/2023/07/11/img_2.png"
-        console.log(t_string)
-        //var images = require.context('@/../', false, /\.png$/)
         console.log('---')
         return p_string
-        //return require(p_string)
-        // return "@/.." + path
         
         }
       }
