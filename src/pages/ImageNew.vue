@@ -63,7 +63,7 @@
         getPhoto(path) {
         var p_string = "http://127.0.0.1:8000" + path
         console.log(p_string)
-        var t_string = "@/../media/uploads/2023/07/11/img_2.png"
+        //var t_string = "@/../media/uploads/2023/07/11/img_2.png"
         console.log('---')
         return p_string        
         },
