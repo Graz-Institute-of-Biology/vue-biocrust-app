@@ -13,10 +13,11 @@
                         <p class="card-text">{{image.id}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                        <a href="" class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
-                        <a href="" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+                        <button @click="downloadImage(getPhoto(image.document))">Download</button> 
+                        <a :href=getPhoto(image.document)  class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
+                        <!-- <a href="" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Download</a> -->
                         </div>
-                        <small class="text-muted">9 mins</small>
+                        <!-- <small class="text-muted">9 mins</small> -->
                       </div>
                     </div>
                   </div>
@@ -57,8 +58,20 @@
         console.log(p_string)
         var t_string = "@/../media/uploads/2023/07/11/img_2.png"
         console.log('---')
-        return p_string
-        
+        return p_string        
+        },
+        downloadImage(url) {
+        fetch(url)
+          .then(response => response.blob())
+          .then(blob => {
+            const objectURL = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = objectURL;
+            link.download = 'image.jpg';
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.click();
+          })
         }
       }
 
