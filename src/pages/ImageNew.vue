@@ -9,13 +9,15 @@
                     <img :src= getPhoto(image.document) alt="Image">
                     <!-- <img src = "http://127.0.0.1:8000/media/uploads/images/img_2.png" > -->
                     <div class="card-body">
-                        <h4 class=""><a class="text-secondary" href="">{{image.id}}</a></h4>
-                        <p class="card-text">{{image.id}}</p>
+                        <!-- <h4 class=""><a class="text-secondary" href="">{{image.id}}</a></h4> -->
+                        <p class="text-secondary">{{getFilename(image.document)}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                        <button @click="downloadImage(getPhoto(image.document))">Download</button> 
+                        <button class="btn btn-sm btn-outline-primary" @click="downloadImage(getPhoto(image.document))">Download</button> 
+                        <!-- <button @click=getPhoto(image.document) >View</button>  -->
                         <a :href=getPhoto(image.document)  class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
-                        <!-- <a href="" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Download</a> -->
+                        <!-- <a :href=downloadImage(getPhoto(image.document)) download="image.jpg" class="btn btn-sm btn-outline-primary" role="button">Download</a> -->
+                        <!-- <a class="btn btn-sm btn-outline-secondary" :on-click=downloadImage(getPhoto(image.document)) role="button" aria-pressed="true">Download</a> -->
                         </div>
                         <!-- <small class="text-muted">9 mins</small> -->
                       </div>
@@ -72,6 +74,10 @@
             link.rel = 'noopener noreferrer';
             link.click();
           })
+        },
+        getFilename(path) {
+        var filename = path.replace(/^.*[\\\/]/, '')
+        return filename
         }
       }
 
