@@ -13,11 +13,13 @@
                         <p class="text-secondary">{{getFilename(image.document)}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
+                        
                         <button class="btn btn-sm btn-outline-primary" @click="downloadImage(getPhoto(image.document))">Download</button> 
                         <!-- <button @click=getPhoto(image.document) >View</button>  -->
                         <a :href=getPhoto(image.document)  class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
                         <!-- <a :href=downloadImage(getPhoto(image.document)) download="image.jpg" class="btn btn-sm btn-outline-primary" role="button">Download</a> -->
                         <!-- <a class="btn btn-sm btn-outline-secondary" :on-click=downloadImage(getPhoto(image.document)) role="button" aria-pressed="true">Download</a> -->
+                        <button class="btn btn-sm btn-outline-primary" @click="deleteImage(getPhoto(image.document))">Delete</button> 
                         </div>
                         <!-- <small class="text-muted">9 mins</small> -->
                       </div>
@@ -33,6 +35,9 @@
   <script>
     import { getAPI } from '../axios-api'
     import Navbar from '../components/Navbar'
+    import axios from 'axios'
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+    axios.defaults.xsrfCookieName = "csrftoken"
     export default {
       name: 'ImageNew',
       data () {
@@ -62,6 +67,10 @@
         console.log('---')
         return p_string        
         },
+        getFilename(path) {
+        var filename = path.replace(/^.*[\\\/]/, '')
+        return filename
+        },
         downloadImage(url) {
         fetch(url)
           .then(response => response.blob())
@@ -69,15 +78,25 @@
             const objectURL = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = objectURL;
-            link.download = 'image.jpg';
+            link.download = this.getFilename(url);
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.click();
           })
         },
-        getFilename(path) {
-        var filename = path.replace(/^.*[\\\/]/, '')
-        return filename
+        deleteImage(url) {
+
+        axios
+          .delete(url, {
+            headers: {
+             'X-CSRFTOKEN': "csrftoken" }}
+          )
+          .then(response => {
+            console.log('Image deleted successfully!');
+          })
+          .catch(error => {
+            console.error('Error deleting image:', error);
+          });
         }
       }
 
