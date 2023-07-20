@@ -11,11 +11,11 @@
       <div class="copyright d-flex flex-wrap">
         &copy; Coded with
         <i class="fa fa-heart heart"></i> by
-        <a href="https://github.com/cristijora" target="_blank">
-          &nbsp; Cristi Jora.</a
-        >&nbsp; Designed by
-        <a href="https://www.creative-tim.com/?ref=pdf-vuejs" target="_blank"
-          >&nbsp; Creative Tim.</a
+        <a href="https://github.com/stefanherdy" target="_blank">
+          &nbsp; Stefan Herdy</a
+        >&nbsp; and
+        <a href="https://github.com/Pacific89" target="_blank"
+          >&nbsp; Philipp Faulhammer.</a
         >
       </div>
     </div>
