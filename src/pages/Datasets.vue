@@ -2,25 +2,25 @@
     <div class="image">
       <Navbar></Navbar> 
         <div class="album py-5 bg-light">
-            <div>
+            <div> 
                 <h2>Upload Dataset</h2>
                 <form @submit.prevent="uploadDataset">
-                <label for="dataset_name">Dataset Name:</label>
-                <input v-model="dataset_name" id="dataset_name" required />
+                <label class="text-secondary" for="dataset_name">Dataset Name:</label>
+                <input class="btn btn-sm btn-outline-primary" v-model="dataset_name" id="dataset_name" required />
                 <br />
-                <label for="description">Description:</label>
-                <input v-model="description" id="description" required />
+                <label class="ext-secondary" for="description">Description:</label>
+                <input class="btn btn-sm btn-outline-primary" v-model="description" id="description" required />
                 <br />
-                <label for="coordinates">Coordinates:</label>
-                <input v-model="coordinates" id="coordinates" required />
+                <label class="ext-secondary" for="coordinates">Coordinates:</label>
+                <input class="btn btn-sm btn-outline-primary" v-model="coordinates" id="coordinates" required />
                 <br />
-                <button type="submit">Upload</button>
+                <button class="btn btn-sm btn-outline-primary" type="submit">Upload</button>
                 </form>
 
                 <h2>Uploaded Datasets</h2>
                 <ul>
-                <li v-for="(dataset, index) in APIData" :key="index">
-                    "{{ dataset.dataset_name }}"
+                <li class ="col-12" v-for="(dataset, index) in APIData" :key="index">
+                    <!-- "{{ dataset.dataset_name }}" -->
                     <strong>{{ dataset.dataset_name }}</strong><br />
                     Description: {{ dataset.description }}<br />
                     Coordinates: {{ dataset.coordinates }}

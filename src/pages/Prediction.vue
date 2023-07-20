@@ -1,14 +1,14 @@
 <template>
     <div class="d-flex flex-column justify-content-center align-items-center" style="height: 80vh">
       <div class="p-2">
-        <h1 v-if="!APIResult.length">Enter to predict Iris type</h1>
+        <h1 v-if="!APIResult.length">Enter Input Values</h1>
         <h1 v-else style="font-size:4rem">{{APIResult}}</h1>
       </div>
       <div class="p-2">
         <form @submit.prevent>
           <div class="form-row" style="max-width:500px">
             <div class="form-group col-md-3">
-              <label class="col-12 px-0" for="sepal_length">Sepal Length</label>
+              <label class="col-12 px-0" for="sepal_length">Input 1</label>
               <input
                 class="form-control"
                 v-model.trim="irisdata.sepal_length"
@@ -17,7 +17,7 @@
               />
             </div>
             <div class="form-group col-md-3">
-              <label class="col-12 px-0" for="sepal_length">Sepal Width</label>
+              <label class="col-12 px-0" for="sepal_length">Input 2</label>
               <input
                 class="form-control"
                 v-model.trim="irisdata.sepal_width"
@@ -26,7 +26,7 @@
               />
             </div>
             <div class="form-group col-md-3">
-              <label class="col-12 px-0" for="sepal_length">Petal Length</label>
+              <label class="col-12 px-0" for="sepal_length">Input 3</label>
               <input
                 class="form-control"
                 v-model.trim="irisdata.petal_length"
@@ -35,7 +35,7 @@
               />
             </div>
             <div class="form-group col-md-3">
-              <label class="col-12 px-0" for="sepal_length">Petal Width</label>
+              <label class="col-12 px-0" for="sepal_length">Input 4</label>
               <input
                 class="form-control"
                 v-model.trim="irisdata.petal_width"
