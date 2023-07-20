@@ -52,10 +52,11 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
     'http://127.0.0.1:8080',
     )
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_HEADERS = ['X-CSRFToken', "csrftoken"]
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8080','http://127.0.0.1:8080', 'http://localhost','http://127.0.0.1']
+#CSRF_TRUSTED_ORIGINS = ['http://localhost:8080','http://127.0.0.1:8080', 'http://localhost','http://127.0.0.1']
 
 CSRF_HEADER_NAME = "HTTP_X_CSRFTOKEN"
 CSRF_COOKIE_NAME = "csrftoken"

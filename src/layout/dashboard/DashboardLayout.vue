@@ -18,6 +18,8 @@
         <sidebar-link to="/image" name="Image" icon="ti-image" />
         <sidebar-link to="/files" name="Upload" icon="ti-image" />
         <sidebar-link to="/uploadmodel" name="Models" icon="ti-image" />
+        <sidebar-link to="/datasets" name="Datasets" icon="ti-image" />
+
       </template>
       <mobile-menu>
         <li class="nav-item">

@@ -15,6 +15,8 @@ import Tests from "@/pages/Tests.vue"
 import ImageNew from "@/pages/ImageNew.vue"
 import Upload from "@/pages/Upload.vue"
 import Models from "@/pages/Models.vue"
+import Datasets from "@/pages/Datasets.vue"
+
 
 const routes = [
   {
@@ -22,6 +24,11 @@ const routes = [
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
+      {
+        path: "datasets",
+        name: "datasets",
+        component: Datasets,
+      },
       {
         path: "uploadmodel",
         name: "uploadmodel",

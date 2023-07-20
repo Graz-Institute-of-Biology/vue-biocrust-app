@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostsView, TestsView, ImageView, ImageNewView, GetModelsView
+from .views import PostsView, TestsView, ImageView, ImageNewView, GetModelsView, DatasetListCreateView, DatasetUploadView
 from . import views
 
 app_name = "predict"
@@ -16,6 +16,8 @@ urlpatterns = [
     path('files/', views.index, name='index'),
     path('upload/', views.upload, name='upload'),
     path('uploadmodel/', views.uploadmodel, name='uploadmodel'),
-    
+    path('datasets/', DatasetListCreateView.as_view(), name='dataset-list-create'),
+    path('uploaddataset/', DatasetUploadView.as_view(), name='dataset-upload'),
 ]
+
 

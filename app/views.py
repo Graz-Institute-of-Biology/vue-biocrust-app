@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
-from .models import Posts, Tests, Image, ImageNew, Document, DLModel, ImageDoc, DSetDocument
-from .serializers import PostSerializer, TestSerializer, ImageSerializer, ImageNewSerializer, PredSerializer
+from .models import Posts, Tests, Image, ImageNew, Document, DLModel, ImageDoc, DSetDocument, Dataset
+from .serializers import PostSerializer, TestSerializer, ImageSerializer, ImageNewSerializer, PredSerializer, DatasetSerializer, ModelSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import PredResults
@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 from django.http import JsonResponse
 from .forms import UploadForm, ModelUploadForm
+from rest_framework.views import APIView
 # Create your views here.
 
     
@@ -44,7 +45,7 @@ class GetModelsView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = ImageNewSerializer(queryset, many=True)
+        serializer = ModelSerializer(queryset, many=True)
         return Response(serializer.data)
 
 class PostsView(generics.ListCreateAPIView):
@@ -64,6 +65,14 @@ class PostsView(generics.ListCreateAPIView):
             serializer.save()
             return Response(result)
         return Response(serializer.errors, status=400)
+    
+class DatasetListCreateView(generics.RetrieveAPIView):
+    queryset = Dataset.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = DatasetSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 @csrf_exempt 
@@ -112,3 +121,27 @@ def uploadmodel(request):
             form.save()
     
     return JsonResponse({'success': True})
+
+@csrf_exempt 
+def datasetupload(request):
+    serializer = DatasetSerializer(data=request.POST)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse({'success': True})
+    
+class DatasetUploadView(APIView):
+    def post(self, request, format=None):
+        content_type = request.content_type
+        if content_type.startswith('multipart/form-data'):
+            # Handle file upload using request.FILES
+            dataset_name = request.POST.get('dataset_name')
+            description = request.POST.get('description')
+            coordinates = request.POST.get('coordinates')
+
+            # Do something with the dataset_name, description, and coordinates
+            
+            # Save the Dataset to the database
+            dataset = Dataset(dataset_name=dataset_name, description=description, coordinates=coordinates)
+            dataset.save()
+            
+            return Response({"message": "Upload successful"}, status=201)

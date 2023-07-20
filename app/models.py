@@ -49,4 +49,9 @@ class ImageDoc(models.Model):
 class DLModel(models.Model):
     document = models.ImageField(upload_to='uploads/models')
 
+class Dataset(models.Model):
+    dataset_name = models.CharField(max_length=100)
+    description = models.TextField()
+    coordinates = models.CharField(max_length=100)
+
 
