@@ -38,6 +38,11 @@ class PredResults(models.Model):
 class Document(models.Model):
     document = models.ImageField(upload_to='uploads/images')
 
+class DSetDocument(models.Model):
+    document = models.ImageField(upload_to='uploads/images')
+    name = models.CharField(max_length=250)
+
+
 class ImageDoc(models.Model):
     document = models.ImageField(upload_to='uploads/images')
 

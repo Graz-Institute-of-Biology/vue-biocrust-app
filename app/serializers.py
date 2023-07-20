@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Posts, Tests, Image, ImageNew, PredResults, Document
+from .models import Posts, Tests, Image, ImageNew, PredResults, Document, DSetDocument
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
 class ImageNewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Document
+        model = DSetDocument
         fields = '__all__' 
 
 class PredSerializer(serializers.ModelSerializer):

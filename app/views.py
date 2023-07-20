@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
-from .models import Posts, Tests, Image, ImageNew, Document, DLModel, ImageDoc
+from .models import Posts, Tests, Image, ImageNew, Document, DLModel, ImageDoc, DSetDocument
 from .serializers import PostSerializer, TestSerializer, ImageSerializer, ImageNewSerializer, PredSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -32,8 +32,8 @@ class ImageView(generics.RetrieveAPIView):
         return Response(serializer.data)
     
 class ImageNewView(generics.RetrieveAPIView):
-    queryset = Document.objects.all()
-
+    queryset = DSetDocument.objects.all()#values_list('name', flat=True)
+    names = DSetDocument.objects.values_list('name', flat=True)
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         serializer = ImageNewSerializer(queryset, many=True)
@@ -83,15 +83,15 @@ def getimg(request):
 @csrf_exempt 
 def get_images(request):
     if request:
-        # Assuming your model is named 'MyModel' and the ImageField is named 'image'
-        images = Document.objects.all() #.values_list('image', flat=True)
+        images = DSetDocument.objects.all() #.values_list('image', flat=True)
         
-        image_urls = []
+        paths = []
         for image_path in images:
-            image_url = default_storage.url(image_path)
-            image_urls.append(image_url)
-        
-        return JsonResponse({'image_urls': image_urls})
+            #image_url = default_storage.url(image_path)
+            paths.append(image_path)
+            print(image_path)
+        return JsonResponse({'image_paths': paths})
+    print('dere')
 
 @csrf_exempt 
 def upload(request):

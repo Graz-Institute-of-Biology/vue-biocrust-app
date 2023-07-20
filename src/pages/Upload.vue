@@ -4,7 +4,7 @@
         <div class="file">
             <label class="file-label">
                 <input type="file" ref="file" class="file-input" @change="selectFile" multiple>
-
+                <input v-model="DatasetName" placeholder="Dataset Name" />
                 <span class="file-cta">
                     <span class="file-label">Choose a file...</span>
                 </span>
@@ -35,14 +35,15 @@ export default {
     name: 'Upload',
         data() {
             return {
-                documents: []
+                documents: [],
+                DatasetName: ""
             }
         },
         delimiters: ['[[', ']]'],
         methods: {
             selectFile() {
                 Array.from(this.$refs.file.files).forEach(file => {
-                    this.upload(file)
+                    this.upload(file, this.DatasetName)
 
                     this.documents.push({
                         'name': file.name,
@@ -50,10 +51,10 @@ export default {
                     })
                 })
             },
-            upload(file) {
+            upload(file, DatasetName) {
                 this.progress = 0
 
-                this.performUpload(file)
+                this.performUpload(file, DatasetName)
                 .then(response => {
                     this.documents.forEach(document => {
                         if (document.name === file.name) {
@@ -69,9 +70,11 @@ export default {
                     })
                 })
             },
-            performUpload(file) {
+            performUpload(file, DatasetName) {
                 let formData = new FormData()
                 formData.append('document', file)
+                formData.append('name', DatasetName)
+                console.log(DatasetName)
 
                 return getAPI
                     .post('/upload/', formData, {

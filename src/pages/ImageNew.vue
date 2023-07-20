@@ -13,7 +13,7 @@
                         <p class="text-secondary">{{getFilename(image.document)}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                        
+                        "{{ image.name }}"
                         <button class="btn btn-sm btn-outline-primary" @click="downloadImage(getPhoto(image.document))">Download</button> 
                         <!-- <button @click=getPhoto(image.document) >View</button>  -->
                         <a :href=getPhoto(image.document)  class="btn btn-sm btn-outline-primary" role="button" aria-pressed="true">View</a>
@@ -42,7 +42,8 @@
       name: 'ImageNew',
       data () {
         return {
-            APIData: []
+            APIData: [],
+            respo: []
           }
       },
       components: {
@@ -53,6 +54,8 @@
             .then(response => {
               console.log('Post API has recieved data')
               this.APIData = response.data
+              this.respo = response
+              console.log(this.APIData)
 
             })
             .catch(err => {
