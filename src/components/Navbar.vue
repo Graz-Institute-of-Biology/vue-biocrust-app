@@ -4,7 +4,7 @@
       <div class="container mw-0 px-3">
 
         <a class="navbar-brand" href="#">
-        <img src="../assets/brand-name.png" width="" height="27" class="d-inline-block align-top" alt="" loading="lazy">
+        <img src="../assets/img/wg_logo.jpg" width="" height="27" class="d-inline-block align-top" alt="" loading="lazy">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

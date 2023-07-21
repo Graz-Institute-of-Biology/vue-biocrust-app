@@ -2,7 +2,7 @@
     <div class="image">
       <Navbar></Navbar> 
         <div class="album py-5 bg-light">
-            <div class = "p-2"> 
+            <div class = "d-flex flex-column justify-content-center align-items-center"> 
                 <h2>Upload Dataset</h2>
                 <form @submit.prevent="uploadDataset">
                 <div class = "form-grid"> 
