@@ -137,7 +137,9 @@ class DatasetUploadView(APIView):
             dataset_name = request.POST.get('dataset_name')
             description = request.POST.get('description')
             coordinates = request.POST.get('coordinates')
-
+            #names = Dataset.objects.all().filter('dataset_name')
+            if Dataset.objects.filter(dataset_name=dataset_name).exists():
+                return Response({"message": "Name already in use"}, status=400)
             # Do something with the dataset_name, description, and coordinates
             
             # Save the Dataset to the database

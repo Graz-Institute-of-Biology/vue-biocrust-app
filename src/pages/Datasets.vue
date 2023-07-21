@@ -2,21 +2,41 @@
     <div class="image">
       <Navbar></Navbar> 
         <div class="album py-5 bg-light">
-            <div> 
+            <div class = "p-2"> 
                 <h2>Upload Dataset</h2>
                 <form @submit.prevent="uploadDataset">
+                <div class = "form-grid"> 
                 <label class="text-secondary" for="dataset_name">Dataset Name:&nbsp</label>
                 <input class="btn btn-sm btn-outline-primary" v-model="dataset_name" id="dataset_name" required />
                 <br />
-                <label class="ext-secondary" for="description">Description:&nbsp</label>
+                </div>
+                <div class = "form-grid"> 
+                <label class="text-secondary" for="description">Description:&nbsp</label>
                 <input class="btn btn-sm btn-outline-primary" v-model="description" id="description" required />
                 <br />
-                <label class="ext-secondary" for="coordinates">Coordinates:&nbsp</label>
+                </div>
+                <div class = "form-grid"> 
+                <label class="text-secondary" for="coordinates">Coordinates:&nbsp</label>
                 <input class="btn btn-sm btn-outline-primary" v-model="coordinates" id="coordinates" required />
                 <br />
+                </div>
+
                 <button class="btn btn-primary btn-lg" type="submit">Upload</button>
                 </form>
-
+                <div v-if="responseMessage">
+                    <div class="alert alert-success" v-if="success == true">
+                    <button type="button" aria-hidden="true" class="close">×</button>
+                    <span>
+                    <b> It Worked! - </b> {{ responseMessage }} </span
+                    >
+                    </div>
+                    <div class="alert alert-warning" v-if="success == false">
+                    <button type="button" aria-hidden="true" class="close">×</button>
+                    <span>
+                    <b> Warning - </b> {{ responseMessage }} </span
+                    >
+                    </div>
+                </div>  
                 <h2>Uploaded Datasets</h2>
                 <ul>
                 <li class ="col-12" v-for="(dataset, index) in APIData" :key="index">
@@ -49,7 +69,9 @@
         description: "",
         coordinates: "",
         datasets: [],
-        APIData: []
+        APIData: [],
+        responseMessage: '',
+        success: 0
         };
     },
     mounted() {
@@ -79,6 +101,8 @@
             .then(response => {
             // Add the new dataset to the list on the frontend
             this.datasets.push(newDataset);
+            this.responseMessage = 'Upload Successful'
+            this.success = true
 
             // Clear the input fields after successful upload
             this.dataset_name = "";
@@ -87,6 +111,8 @@
             })
             .catch(error => {
             console.error(error);
+            this.responseMessage = error.response.data.message;
+            this.success = false
             });
         },
         fetchDatasets() {
