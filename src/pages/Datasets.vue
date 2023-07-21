@@ -5,16 +5,16 @@
             <div> 
                 <h2>Upload Dataset</h2>
                 <form @submit.prevent="uploadDataset">
-                <label class="text-secondary" for="dataset_name">Dataset Name:</label>
+                <label class="text-secondary" for="dataset_name">Dataset Name:&nbsp</label>
                 <input class="btn btn-sm btn-outline-primary" v-model="dataset_name" id="dataset_name" required />
                 <br />
-                <label class="ext-secondary" for="description">Description:</label>
+                <label class="ext-secondary" for="description">Description:&nbsp</label>
                 <input class="btn btn-sm btn-outline-primary" v-model="description" id="description" required />
                 <br />
-                <label class="ext-secondary" for="coordinates">Coordinates:</label>
+                <label class="ext-secondary" for="coordinates">Coordinates:&nbsp</label>
                 <input class="btn btn-sm btn-outline-primary" v-model="coordinates" id="coordinates" required />
                 <br />
-                <button class="btn btn-sm btn-outline-primary" type="submit">Upload</button>
+                <button class="btn btn-primary btn-lg" type="submit">Upload</button>
                 </form>
 
                 <h2>Uploaded Datasets</h2>
