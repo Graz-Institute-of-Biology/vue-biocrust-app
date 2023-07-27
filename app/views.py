@@ -104,13 +104,16 @@ def get_images(request):
 
 @csrf_exempt 
 def upload(request):
-    if request.FILES:
+    if request:
         form = UploadForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
     
-    return JsonResponse({'success': True})
+            return JsonResponse({'success': True})
+        
+        else:
+            return JsonResponse({'success': False})
 
 @csrf_exempt 
 def uploadmodel(request):
@@ -140,7 +143,6 @@ class DatasetUploadView(APIView):
             #names = Dataset.objects.all().filter('dataset_name')
             if Dataset.objects.filter(dataset_name=dataset_name).exists():
                 return Response({"message": "Name already in use"}, status=400)
-            # Do something with the dataset_name, description, and coordinates
             
             # Save the Dataset to the database
             dataset = Dataset(dataset_name=dataset_name, description=description, coordinates=coordinates)

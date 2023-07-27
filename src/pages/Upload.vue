@@ -3,14 +3,19 @@
         <h1 class="title mb-6">Uploader</h1>
         <div class="file">
             <label class="file-label">
-                <input type="file" ref="file" class="file-input" @change="selectFile" multiple>
-                <input v-model="DatasetName" placeholder="Dataset Name" />
+                <form @submit.prevent="selectFile">
+                <input v-model="DatasetName" placeholder="Dataset Name" required />
+                <input type="file" ref="file" class="file-input"  multiple>
                 <span class="file-cta">
                     <span class="file-label">Choose a file...</span>
                 </span>
+                <!-- <button class="button is-primary mt-2" v-if="documents.length" @click="upload">Upload</button> -->
+                <button class="btn btn-primary btn-lg" type="submit">Upload</button>
+                </form>
+
             </label>
         </div>
-        <button class="button is-primary mt-2" v-if="documents.length" @click="upload">Upload</button>
+        <!-- <button class="button is-primary mt-2" v-if="documents.length" @click="upload">Upload</button> -->
         
         <div 
             class="notification mt-6"
@@ -54,7 +59,7 @@ export default {
             upload(file, DatasetName) {
                 this.progress = 0
 
-                this.performUpload(file, DatasetName)
+                this.performUpload(file, this.DatasetName)
                 .then(response => {
                     this.documents.forEach(document => {
                         if (document.name === file.name) {
@@ -75,6 +80,7 @@ export default {
                 formData.append('document', file)
                 formData.append('name', DatasetName)
                 console.log(DatasetName)
+                console.log(formData)
 
                 return getAPI
                     .post('/upload/', formData, {
