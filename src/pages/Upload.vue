@@ -4,13 +4,15 @@
         <div class="file">
             <label class="file-label">
                 <form @submit.prevent="selectFile">
-                <input v-model="DatasetName" placeholder="Dataset Name" required />
-                <input type="file" ref="file" class="file-input"  multiple>
-                <span class="file-cta">
-                    <span class="file-label">Choose a file...</span>
-                </span>
-                <!-- <button class="button is-primary mt-2" v-if="documents.length" @click="upload">Upload</button> -->
-                <button class="btn btn-primary btn-lg" type="submit">Upload</button>
+                    <select v-model="DatasetName" required>
+                        <option v-for="(item, index) in APIData" :key="index" :value="item.dataset_name">{{ item.dataset_name }} </option>
+                    </select>
+                    <input type="file" ref="file" class="file-input"  multiple required>
+                    <span class="file-cta">
+                        <span class="file-label">Choose a file...</span>
+                    </span>
+                    <!-- <button class="button is-primary mt-2" v-if="documents.length" @click="upload">Upload</button> -->
+                    <button class="btn btn-primary btn-lg" type="submit">Upload</button>
                 </form>
 
             </label>
@@ -41,8 +43,14 @@ export default {
         data() {
             return {
                 documents: [],
-                DatasetName: ""
+                DatasetName: null,
+                APIData: [],
+                allNames: [] 
             }
+        },
+        mounted() {
+            // When the component is mounted, call a method to extract the names
+            this.fetchDatasets();
         },
         delimiters: ['[[', ']]'],
         methods: {
@@ -97,7 +105,17 @@ export default {
                             "X-CSRFToken": "{{ csrf_token }}"
                         }
                     })*/
-            }
+            },
+            fetchDatasets() {
+                // Fetch the list of datasets from backend (Django) using Axios
+                return getAPI.get("/datasets/")
+                    .then(response => {
+                    this.APIData = response.data;
+                    })
+                    .catch(error => {
+                    console.error(error);
+                    });
+            },
         }
     }
     
